@@ -5,10 +5,10 @@ import {connectDB} from "./config/db";
 
 
 import cryptoRoutes from "./routes/cryptoRoutes";
+import { swaggerUi, swaggerSpec } from "./swagger";
 
 
 dotenv.config();
-connectDB();
 
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -18,6 +18,9 @@ app.use(express.json());
 
 
 app.use("/api/crypto", cryptoRoutes);
+
+// Swagger UI
+app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
 
 app.listen(PORT, () => {
