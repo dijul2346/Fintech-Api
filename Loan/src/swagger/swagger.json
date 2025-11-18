@@ -63,17 +63,17 @@
       }
     },
 
-    "/types/{loanType}": {
+    "/types/{id}": {
       "put": {
-        "summary": "Update interest rate for an existing loan type",
+        "summary": "Update interest rate for an existing loan type (by _id)",
         "tags": ["Loan Types"],
         "parameters": [
           {
             "in": "path",
-            "name": "loanType",
+            "name": "id",
             "schema": { "type": "string" },
             "required": true,
-            "example": "Car Loan"
+            "example": "67b49b41c7f8e9824c2de112"
           }
         ],
         "requestBody": {
@@ -99,15 +99,15 @@
         }
       },
       "delete": {
-        "summary": "Delete a loan type",
+        "summary": "Delete a loan type (by _id)",
         "tags": ["Loan Types"],
         "parameters": [
           {
             "in": "path",
-            "name": "loanType",
+            "name": "id",
             "schema": { "type": "string" },
             "required": true,
-            "example": "Car Loan"
+            "example": "67b49b41c7f8e9824c2de112"
           }
         ],
         "responses": {
