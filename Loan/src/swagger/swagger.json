@@ -7,10 +7,10 @@
   },
   "servers": [
     {
-      "url": "https://loan-l4lv.onrender.com"
+      "url": "https://loan-l4lv.onrender.com/api/loan"
     },
     {
-      "url": "http://localhost:5000/api/loans"
+      "url": "http://localhost:5000/api/loan"
     }
   ],
   "paths": {
