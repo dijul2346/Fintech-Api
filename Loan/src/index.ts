@@ -5,6 +5,7 @@ import {connectDB} from "./config/db";
 
 
 import loanRoutes from "./routes/loanRoutes";
+import { setupSwagger } from "./swagger/swaggeer";
 
 dotenv.config();
 connectDB();
@@ -14,7 +15,7 @@ const PORT = process.env.PORT || 5000;
 
 app.use(cors());
 app.use(express.json());
-
+setupSwagger(app)
 app.use("/api/loan", loanRoutes);
 
 app.listen(PORT, () => {
