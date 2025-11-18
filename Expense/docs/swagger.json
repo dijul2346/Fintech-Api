@@ -1,20 +1,6 @@
 {
   "openapi": "3.0.0",
   "info": {
-    "title": "Fintech API",
-    "version": "0.0.1",
-    "description": "Swagger documentation placeholder. Replace with generated documentation JSON."
-  },
-  "servers": [
-    {
-      "url": "http://localhost:5000",
-      "description": "Local server"
-    }
-  ],
-  "paths": {},
-  {
-  "openapi": "3.0.0",
-  "info": {
     "title": "Expense Management API",
     "version": "1.0.0",
     "description": "API documentation for adding, editing, deleting, and retrieving expenses."
@@ -50,9 +36,6 @@
                 }
               }
             }
-          },
-          "500": {
-            "description": "Server error"
           }
         }
       },
@@ -72,9 +55,6 @@
                 }
               }
             }
-          },
-          "500": {
-            "description": "Server error"
           }
         }
       }
@@ -114,12 +94,6 @@
                 }
               }
             }
-          },
-          "404": {
-            "description": "Expense not found"
-          },
-          "500": {
-            "description": "Server error"
           }
         }
       },
@@ -147,12 +121,6 @@
                 }
               }
             }
-          },
-          "404": {
-            "description": "Expense not found"
-          },
-          "500": {
-            "description": "Server error"
           }
         }
       }
@@ -242,4 +210,4 @@
   }
 }
 
-}
+
