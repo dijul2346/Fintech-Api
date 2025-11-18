@@ -84,7 +84,8 @@ export const calculateLoan = async (req: Request, res: Response): Promise<void> 
         res.json({
             loanType,
             interestRate: annualRate,
-            emi: parseFloat(emi.toFixed(2))
+            emi: parseFloat(emi.toFixed(2)),
+            totalPayment:numerator
         });
     } catch (error) {
         res.status(500).json({ message: "Error calculating EMI", error });
