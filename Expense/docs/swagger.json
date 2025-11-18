@@ -1,0 +1,245 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Fintech API",
+    "version": "0.0.1",
+    "description": "Swagger documentation placeholder. Replace with generated documentation JSON."
+  },
+  "servers": [
+    {
+      "url": "http://localhost:5000",
+      "description": "Local server"
+    }
+  ],
+  "paths": {},
+  {
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Expense Management API",
+    "version": "1.0.0",
+    "description": "API documentation for adding, editing, deleting, and retrieving expenses."
+  },
+  "servers": [
+    {
+      "url": "http://localhost:5000",
+      "description": "Local Server"
+    }
+  ],
+  "paths": {
+    "/api/expenses": {
+      "post": {
+        "summary": "Add a new expense",
+        "tags": ["Expenses"],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ExpenseInput"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Expense added successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ExpenseResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Server error"
+          }
+        }
+      },
+      "get": {
+        "summary": "Get all expenses",
+        "tags": ["Expenses"],
+        "responses": {
+          "200": {
+            "description": "List of all expenses",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Expense"
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Server error"
+          }
+        }
+      }
+    },
+    "/api/expenses/{id}": {
+      "put": {
+        "summary": "Update an existing expense",
+        "tags": ["Expenses"],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Expense ID"
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ExpenseInput"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Expense updated successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ExpenseResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Expense not found"
+          },
+          "500": {
+            "description": "Server error"
+          }
+        }
+      },
+      "delete": {
+        "summary": "Delete an expense",
+        "tags": ["Expenses"],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Expense ID"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Expense deleted successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DeleteResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Expense not found"
+          },
+          "500": {
+            "description": "Server error"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "ExpenseInput": {
+        "type": "object",
+        "required": ["title", "amount", "category"],
+        "properties": {
+          "title": {
+            "type": "string",
+            "example": "Groceries"
+          },
+          "amount": {
+            "type": "number",
+            "example": 1200
+          },
+          "category": {
+            "type": "string",
+            "example": "Food"
+          },
+          "date": {
+            "type": "string",
+            "format": "date",
+            "example": "2025-02-01"
+          }
+        }
+      },
+      "Expense": {
+        "type": "object",
+        "properties": {
+          "_id": {
+            "type": "string",
+            "example": "67b9d2ac3f2d9c34a6e1f234"
+          },
+          "title": {
+            "type": "string",
+            "example": "Electricity Bill"
+          },
+          "amount": {
+            "type": "number",
+            "example": 850
+          },
+          "category": {
+            "type": "string",
+            "example": "Utilities"
+          },
+          "date": {
+            "type": "string",
+            "format": "date",
+            "example": "2025-02-10"
+          },
+          "createdAt": {
+            "type": "string",
+            "example": "2025-02-10T08:45:12.000Z"
+          },
+          "updatedAt": {
+            "type": "string",
+            "example": "2025-02-10T08:45:12.000Z"
+          }
+        }
+      },
+      "ExpenseResponse": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string",
+            "example": "Expense updated successfully"
+          },
+          "updated": {
+            "$ref": "#/components/schemas/Expense"
+          }
+        }
+      },
+      "DeleteResponse": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string",
+            "example": "Expense deleted successfully"
+          }
+        }
+      }
+    }
+  }
+}
+
+}
