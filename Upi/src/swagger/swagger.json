@@ -1,0 +1,184 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Loan API",
+    "version": "1.0.0",
+    "description": "API for managing loan types, interest rates, and calculating EMI."
+  },
+  "servers": [
+    {
+      "url": "https://loan-l4lv.onrender.com/api/loan"
+    },
+    {
+      "url": "http://localhost:5000/api/loan"
+    }
+  ],
+  "paths": {
+    "/types": {
+      "post": {
+        "summary": "Add a new loan type",
+        "tags": ["Loan Types"],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": ["loanType", "interestRate"],
+                "properties": {
+                  "loanType": {
+                    "type": "string",
+                    "example": "Car Loan"
+                  },
+                  "interestRate": {
+                    "type": "number",
+                    "example": 9.5
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": { "description": "Loan type added successfully" },
+          "400": { "description": "Loan type already exists" }
+        }
+      },
+      "get": {
+        "summary": "Get all loan types with interest rates",
+        "tags": ["Loan Types"],
+        "responses": {
+          "200": {
+            "description": "List of loan types",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": { "$ref": "#/components/schemas/LoanType" }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+
+    "/types/{id}": {
+      "put": {
+        "summary": "Update interest rate for an existing loan type (by _id)",
+        "tags": ["Loan Types"],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "schema": { "type": "string" },
+            "required": true,
+            "example": "67b49b41c7f8e9824c2de112"
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": ["interestRate"],
+                "properties": {
+                  "interestRate": {
+                    "type": "number",
+                    "example": 10.2
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": { "description": "Loan type updated successfully" },
+          "404": { "description": "Loan type not found" }
+        }
+      },
+      "delete": {
+        "summary": "Delete a loan type (by _id)",
+        "tags": ["Loan Types"],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "schema": { "type": "string" },
+            "required": true,
+            "example": "67b49b41c7f8e9824c2de112"
+          }
+        ],
+        "responses": {
+          "200": { "description": "Loan type deleted successfully" },
+          "404": { "description": "Loan type not found" }
+        }
+      }
+    },
+
+    "/calculate": {
+      "post": {
+        "summary": "Calculate EMI and interest for a loan",
+        "tags": ["Loan Calculator"],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": ["loanType", "principal", "months"],
+                "properties": {
+                  "loanType": {
+                    "type": "string",
+                    "example": "Car Loan"
+                  },
+                  "principal": {
+                    "type": "number",
+                    "example": 500000
+                  },
+                  "months": {
+                    "type": "number",
+                    "example": 60
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "EMI calculated successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "loanType": { "type": "string" },
+                    "interestRate": { "type": "number" },
+                    "emi": { "type": "number" },
+                    "totalInterest": { "type": "number" },
+                    "totalPayment": { "type": "number" }
+                  }
+                }
+              }
+            }
+          },
+          "404": { "description": "Loan type not found" }
+        }
+      }
+    }
+  },
+
+  "components": {
+    "schemas": {
+      "LoanType": {
+        "type": "object",
+        "properties": {
+          "loanType": { "type": "string" },
+          "interestRate": { "type": "number" }
+        }
+      }
+    }
+  }
+}

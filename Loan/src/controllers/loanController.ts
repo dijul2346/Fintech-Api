@@ -1,4 +1,3 @@
-// src/controllers/loanController.ts
 import { Request, Response } from "express";
 import LoanRate from "../models/loanRateModel";
 
