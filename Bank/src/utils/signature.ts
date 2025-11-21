@@ -9,7 +9,7 @@ export class SignatureUtil {
     static loadKey() {
         try {
             this.publicKey = fs.readFileSync("./src/accountId_1625810_public_key.pem", 'utf8');
-            console.log("✅ SignatureUtil: Public Key Loaded.");
+            console.log("Public Key Loaded.");
         } catch (error) {
             console.error(`❌ SignatureUtil Error: Could not load key`);
             process.exit(1);

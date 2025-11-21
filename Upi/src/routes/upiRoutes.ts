@@ -1,11 +1,6 @@
 import { Router } from "express";
-import { createOrder,  verifyPayment, verifyUPI } from "../controllers/upiController";
-
+import { PaymentController } from "../controllers/payment.controller";
 const router = Router();
-
-router.post("/create", createOrder);
-router.get("/verify/:orderId", verifyPayment);
-router.post("/verify-upi", verifyUPI);
-// Webhook added later (after deployment)
-
+router.post('/pay', PaymentController.createTransaction);
+router.get('/pay/verify/:linkId', PaymentController.verifyPayment);
 export default router;

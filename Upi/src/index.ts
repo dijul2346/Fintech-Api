@@ -7,6 +7,7 @@ import {connectDB} from "./config/db";
 import upiRoutes from "./routes/upiRoutes";
 import { setupSwagger } from "./swagger/swaggeer";
 
+
 dotenv.config();
 
 
@@ -18,7 +19,7 @@ app.use(express.json());
 setupSwagger(app)
 
 
-app.use("/api/payments", upiRoutes);
+app.use("/api", upiRoutes);
 
 
 app.listen(PORT, () => {
